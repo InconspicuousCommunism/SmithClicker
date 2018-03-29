@@ -27,4 +27,9 @@ public class ClickBoost extends Effect{
 		EventManager.removeListener(this);
 	}
 
+	@Override
+	public String toString() {
+		return "X" + multBoost + " to clicks";
+	}
+	
 }

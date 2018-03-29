@@ -62,7 +62,7 @@ public abstract class Requirement {
 		
 		@Override
 		public String toString() {
-			return "Upgrade " + upgrade.toString() + " has produced at least " + StringUtils.formatNumber(amount) + "  smiths";
+			return "Upgrade " + upgrade.getName() + " has produced at least " + StringUtils.formatNumber(amount) + "  smiths";
 		}
 		
 	}

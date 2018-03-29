@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import griffin.smithclicker.effect.Effect;
+import griffin.smithclicker.effect.Effects;
 import griffin.smithclicker.main.GameManager;
 import griffin.smithclicker.main.SmithClicker;
 import griffin.smithclicker.objects.GameObject;
@@ -50,6 +52,14 @@ public class StatBox extends GameObject{
 		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Clicks", StringUtils.formatNumber(GameManager.getClickSmiths()), getX(), getWidth(), getY() + 140);
 		StringUtils.drawStats(g, STATS_INFO, "Total Amount of Smiths Collected", StringUtils.formatNumber(GameManager.getTotalSmiths()), getX(), getWidth(), getY() + 180);
 		StringUtils.drawStats(g, STATS_INFO, "Total Clicks", StringUtils.formatNumber(GameManager.getTotalClicks()), getX(), getWidth(), getY() + 220);
+		g.setColor(Color.black);
+		StringUtils.drawStringCentered(g, STATS_INFO, "EFFECTS", getX(), WIDTH, 280 + getY());
+		int y = 280 + getY() + 20;
+		g.setColor(Color.RED);
+		for(Effect e : Effects.effects.getList()) {
+			y+=20;
+			y = StringUtils.drawDescription(g, STATS_INFO, e.toString(), getX(), y, getWidth(), 20);
+		}
 		
 		Point mouse = SmithClicker.frame.getMouseLocation();
 		if(mouse != null) {

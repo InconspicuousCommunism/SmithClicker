@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.TreeMap;
 
+import griffin.smithclicker.effect.Effects;
 import griffin.smithclicker.event.EventManager;
 import griffin.smithclicker.objects.GameObject;
 import griffin.smithclicker.objects.IClickable;
@@ -122,11 +123,11 @@ public class GameManager {
 				int posX = rand.nextInt(Smith.getBoxWidth() - GoldenSmith.getBoxWidth());
 				int posY = rand.nextInt(Smith.getBoxHeight() - GoldenSmith.getBoxHeight()) + Smith.getPosY();
 				addObject(new GoldenSmith(posX, posY));
-				System.out.println("a");
 			}
 			gSmithCounter = rand.nextInt(3600) + 2400;
 		}else gSmithCounter--;
 		
+		Effects.effects.tickEffects();
 		
 	}
 	

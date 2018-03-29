@@ -26,5 +26,10 @@ public class SPSBoost extends Effect{
 	public void kill() {
 		EventManager.removeListener(this);
 	}
+	
+	@Override
+	public String toString() {
+		return "X" + multBoost + " to Smiths Per Second";
+	}
 
 }

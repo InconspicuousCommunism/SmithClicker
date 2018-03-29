@@ -21,6 +21,7 @@ public abstract class Effect {
 		}
 		if(isOver) {
 			kill();
+			Effects.effects.sendToDeath(this);
 		}
 	}
 	

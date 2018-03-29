@@ -95,14 +95,14 @@ public class Upgrades {
 		int pos = 0;
 		ArrayList<Miniupgrade> upList = new ArrayList<Miniupgrade>();
 		for(Miniupgrade m : miniupgradeList) {
-			if(m.canBeBought()) {
+			if(m.canBeBought() && !m.isBought()) {
 				m.changeListPosition(pos);
 				upList.add(m);
 				pos++;
 			}
 		}
 		for(Miniupgrade m : miniupgradeList) {
-			if(!m.canBeBought()) {
+			if(!m.canBeBought() && !m.isBought()) {
 				m.changeListPosition(pos);
 				upList.add(m);
 				pos++;
