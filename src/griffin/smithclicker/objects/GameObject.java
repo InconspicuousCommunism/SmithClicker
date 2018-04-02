@@ -86,4 +86,6 @@ public abstract class GameObject {
 		GameManager.getManager().removeObject(this);
 	}
 	
+	public void onAdded() {}
+	
 }

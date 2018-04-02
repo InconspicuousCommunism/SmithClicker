@@ -3,7 +3,7 @@ package griffin.smithclicker.objects.upgrades.mini;
 import java.awt.Color;
 import java.awt.Image;
 import java.math.BigInteger;
-import java.util.List;
+import java.util.ArrayList;
 
 import griffin.smithclicker.event.EventManager;
 import griffin.smithclicker.event.IncreaseSmithEvent;
@@ -15,7 +15,7 @@ public class TotalMU extends Miniupgrade {
 	private IncreaseType type;
 	private BigInteger increase;
 	
-	public TotalMU(String name, String desc, BigInteger cost, Image img, List<Requirement> requires, IncreaseType type, BigInteger increase, Color color) {
+	public TotalMU(String name, String desc, BigInteger cost, Image img, ArrayList<Requirement> requires, IncreaseType type, BigInteger increase, Color color) {
 		super(name, desc, cost, img, requires, color);
 		this.type = type;
 		this.increase = increase;

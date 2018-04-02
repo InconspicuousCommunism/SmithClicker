@@ -188,6 +188,7 @@ public class GameManager {
 	 */
 	public void addObject(GameObject o){
 		addList.add(o);
+		o.onAdded();
 	}
 	
 	public void removeObject(GameObject o){

@@ -18,7 +18,7 @@ import griffin.smithclicker.util.ImageHelper;
 import griffin.smithclicker.util.ScaleUtils;
 import griffin.smithclicker.util.StringUtils;
 
-public abstract class Miniupgrade extends GameObject implements IClickable{
+public abstract class Miniupgrade extends GameObject implements IClickable, Comparable<Miniupgrade>{
 	
 	private static final Image CHECK_ICON = ImageHelper.loadImage("/misc_icons/checkmark.png");
 	private static final Image X_ICON = ImageHelper.loadImage("/misc_icons/x_icon.png");
@@ -35,6 +35,7 @@ public abstract class Miniupgrade extends GameObject implements IClickable{
 	private String name, desc;
 	private int pos;
 	private boolean bought = false;
+	private boolean displayed = false;
 	
 	private BigInteger cost;
 	
@@ -52,6 +53,7 @@ public abstract class Miniupgrade extends GameObject implements IClickable{
 		this.img = img;
 		this.requires = requires;
 		this.color = color;
+		GameManager.getManager().addObject(new MiniDescript(this, getWidth(), getHeight()));
 	}
 	
 	public void changeListPosition(int pos) {
@@ -70,46 +72,10 @@ public abstract class Miniupgrade extends GameObject implements IClickable{
 			GraphicsHelper.drawBorderedImg(g, img, c, getX(), getY(), getWidth(), getHeight(), 4);
 			g.setColor(color);
 			g.fillRect(getX() + 4, getY() +  + getHeight() - 8, getWidth() - 8, 4);
-			
-			try {
-				int mx = SmithClicker.frame.getMouseLocation().x - GameManager.GAME_INSET_LEFT;
-				int my = SmithClicker.frame.getMouseLocation().y - GameManager.GAME_INSET_TOP;
-				if(mx > getX() && my > getY() && mx < getX() + getWidth() && my < getY() + getHeight()) {
-					drawHover(g, mx,my);
-					if(this.getZ() != 1) 
-						this.setZ(1);
-				} else {
-					if(this.getZ() != 1000)
-						this.setZ(1000);
-				}
-			}catch(Exception e) {};
+			displayed = true;
 		} else {
 			this.setX(-1000);
 		}
-	}
-	
-	private void drawHover(Graphics g, int mx, int my) {
-		mx += 15; //Move away form the mouse a tad
-		my += 15;
-		int borderEndX = ScaleUtils.scaleNumber(3) + mx;
-		int borderEndY = ScaleUtils.scaleNumber(3) + my;
-		int betweenWidth = ScaleUtils.scaleNumber(190-6);
-		GraphicsHelper.drawBorderedRect(g, Color.gray, Color.black, mx, my, ScaleUtils.scaleNumber(190), ScaleUtils.scaleNumber(230), ScaleUtils.scaleNumber(3));
-		g.setColor(Color.black);
-		g.drawRect(mx, my, ScaleUtils.scaleNumber(190), ScaleUtils.scaleNumber(230));
-		g.setFont(NAME_FONT);
-		g.drawString(name, borderEndX, borderEndY + ScaleUtils.scaleNumber(13));
-		int cury = StringUtils.drawDescription(g, DESC_FONT, desc, borderEndX, borderEndY + ScaleUtils.scaleNumber(27), betweenWidth, StringUtils.getStringHeight(g, DESC_FONT)-4);
-		g.fillRect(borderEndX, cury + ScaleUtils.scaleNumber(2), betweenWidth, ScaleUtils.scaleNumber(3));
-		cury+=StringUtils.getStringHeight(g, DESC_FONT);
-		for(Requirement r : this.requires) {
-			Image img = r.checkCompleted() ? CHECK_ICON : X_ICON;
-			g.drawImage(img, borderEndX, cury - StringUtils.getStringHeight(g, DESC_FONT) /2 -4, StringUtils.getStringHeight(g, DESC_FONT) - 4, StringUtils.getStringHeight(g, DESC_FONT) - 4, null);
-			cury = StringUtils.drawDescription(g, DESC_FONT, r.toString(), borderEndX + StringUtils.getStringHeight(g, DESC_FONT) - 4, cury, betweenWidth, StringUtils.getStringHeight(g, DESC_FONT)-4) + StringUtils.getStringHeight(g, DESC_FONT) - 4;
-		}
-		Image img = (GameManager.getSmiths().compareTo(cost) >= 0) ? CHECK_ICON : X_ICON;
-		g.drawImage(img, borderEndX, cury - StringUtils.getStringHeight(g, DESC_FONT) /2 -4, StringUtils.getStringHeight(g, DESC_FONT) - 4, StringUtils.getStringHeight(g, DESC_FONT) - 4, null);
-		StringUtils.drawDescription(g, DESC_FONT, "Costs " + StringUtils.formatNumber(cost), borderEndX + StringUtils.getStringHeight(g, DESC_FONT) - 4, cury, betweenWidth, StringUtils.getStringHeight(g, DESC_FONT)-4);
 	}
 	
 	public boolean canBeBought() {
@@ -145,4 +111,32 @@ public abstract class Miniupgrade extends GameObject implements IClickable{
 		return bought;
 	}
 	
+	public List<Requirement> getRequirements(){
+		return this.requires;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getDesc() {
+		return this.desc;
+	}
+	
+	public BigInteger getCost() {
+		return this.cost;
+	}
+	
+	@Override
+	public int compareTo(Miniupgrade o) {
+		return o.getZ() - this.getZ();
+	}
+	
+	public boolean isDisplayed() {
+		return this.displayed;
+	}
+	
+	public void setDisplayed(boolean b) {
+		this.displayed = b;
+	}
 }

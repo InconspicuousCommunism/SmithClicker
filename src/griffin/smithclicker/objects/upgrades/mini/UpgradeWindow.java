@@ -3,6 +3,7 @@ package griffin.smithclicker.objects.upgrades.mini;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import griffin.smithclicker.main.GameManager;
 import griffin.smithclicker.objects.GameObject;
@@ -34,11 +35,16 @@ public class UpgradeWindow extends GameObject implements IClickable{
 		g.setColor(Color.black);
 		g.drawRect(getX(), getY(), getWidth(), getHeight());
 		
+		for(Miniupgrade m : upgradeList) {
+			m.setDisplayed(false);
+		}
+		
 		for(int i = 0; i < 42; i++) {
 			try {
 				upgradeList.get(i).render(g);
 			}catch(Exception e) {}
 		}
+		
 		
 		Upgrades.upgrades.orderMinis();
 		UpgradeWindow.upgradeList = Upgrades.upgrades.getMiniupgrades();

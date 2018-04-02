@@ -21,7 +21,7 @@ public class Hitmarker extends GameObject{
 		this.time = time;
 		this.totalTime = time;
 		Random r = new Random();
-		Color c = new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+		Color c = new Color(Color.HSBtoRGB(r.nextFloat(), 1f, 1f));
 		img = ImageHelper.colorize(HIT_MARKER, c);
 	}
 	
