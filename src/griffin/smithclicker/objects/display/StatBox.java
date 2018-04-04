@@ -17,9 +17,15 @@ import griffin.smithclicker.util.StringUtils;
 
 public class StatBox extends GameObject{
 	
-	private static final Font STATS_TITLE = new Font("Comic Sans MS", Font.BOLD, 24);
-	private static final Font STATS_INFO = new Font("Comic Sans MS", Font.PLAIN, 20);
-	private static final Font UPGRADE_STATS = new Font("Comic Sans MS", Font.PLAIN, 18);
+	private static final Font STATS_TITLE;
+	private static final Font STATS_INFO;
+	private static final Font UPGRADE_STATS;
+	
+	static {
+		STATS_TITLE = new Font("Comic Sans MS", Font.BOLD, 24);
+		STATS_INFO = new Font("Comic Sans MS", Font.PLAIN, 20);
+		UPGRADE_STATS = new Font("Comic Sans MS", Font.PLAIN, 18);
+	}
 	
 	private static final int POS_X;
 	private static final int POS_Y;
@@ -46,7 +52,7 @@ public class StatBox extends GameObject{
 		g.drawLine(getX(), getY() + 30, getX() + getWidth(), getY() + 30);
 		g.drawRect(getX(), getY(), getWidth(), getHeight());
 		g.setColor(Color.cyan);
-		StringUtils.drawStringCentered(g, STATS_TITLE, "Game Statistics", 350, getWidth(), getY() + 23);
+		StringUtils.drawStringCentered(g, STATS_TITLE, "Game Statistics", getX(), getWidth(), getY() + 23);
 		StringUtils.drawStats(g, STATS_INFO, "Smiths Per Second", StringUtils.formatNumber(GameManager.getSmithsPerSecond()), getX(), getWidth(), getY() + 60);
 		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Upgrades", StringUtils.formatNumber(GameManager.getUpgradeSmiths()), getX(), getWidth(), getY() + 100);
 		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Clicks", StringUtils.formatNumber(GameManager.getClickSmiths()), getX(), getWidth(), getY() + 140);

@@ -91,6 +91,14 @@ public class Upgrade extends GameObject implements IClickable{
 		}
 	}
 	
+	public void setAmountBought(int num) {
+		this.amount = num;
+	}
+	
+	public void setAmountMade(BigInteger num) {
+		this.smiths_made = num;
+	}
+	
 	protected Image getIcon() {
 		return img;
 	}

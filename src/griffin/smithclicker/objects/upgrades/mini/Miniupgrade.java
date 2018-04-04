@@ -69,7 +69,7 @@ public abstract class Miniupgrade extends GameObject implements IClickable, Comp
 		super.render(g);
 		if(!bought) {
 			Color c = canBeBought() ? Color.green : Color.DARK_GRAY;
-			GraphicsHelper.drawBorderedImg(g, img, c, getX(), getY(), getWidth(), getHeight(), 4);
+			GraphicsHelper.drawBorderedImg(g, img, c, getX(), getY(), getWidth(), getHeight(), ScaleUtils.scaleNumber(4));
 			g.setColor(color);
 			g.fillRect(getX() + 4, getY() +  + getHeight() - 8, getWidth() - 8, 4);
 			displayed = true;

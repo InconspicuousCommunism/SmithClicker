@@ -88,10 +88,8 @@ public class GameManager {
 		addList.add(new SmithCount());
 		addList.add(new StatBox());
 		addList.add(new UpgradeWindow(Upgrades.upgrades.getMiniupgrades()));
-//		for(Miniupgrade u : Upgrades.upgrades.getMiniupgrades()) {
-//			addList.add(u);
-//		}
 		SoundHelper.setBackgroundMusic("screaming.wav");
+		SaveManager.loadFromGameFile();
 	}
 	
 	
@@ -129,6 +127,7 @@ public class GameManager {
 		
 		Effects.effects.tickEffects();
 		
+		SaveManager.saveCurrentGameState();
 	}
 	
 	

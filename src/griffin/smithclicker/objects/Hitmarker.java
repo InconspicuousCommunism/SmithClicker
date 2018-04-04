@@ -7,6 +7,7 @@ import java.util.Random;
 
 import griffin.smithclicker.main.GameManager;
 import griffin.smithclicker.util.ImageHelper;
+import griffin.smithclicker.util.ScaleUtils;
 
 public class Hitmarker extends GameObject{
 	
@@ -15,12 +16,17 @@ public class Hitmarker extends GameObject{
 	private BufferedImage img;
 	private int time;
 	private int totalTime;
+	private Random r;
+	private int size;
 	
 	public Hitmarker(int x, int y, int time) {
 		super(x - HIT_MARKER.getWidth()/2, y - HIT_MARKER.getHeight()/2);
 		this.time = time;
 		this.totalTime = time;
-		Random r = new Random();
+		r = new Random();
+		size = r.nextInt(32) + 20;
+		this.setX(x - ScaleUtils.scaleNumber(size)/2);
+		this.setY(y - ScaleUtils.scaleNumber(size)/2);
 		Color c = new Color(Color.HSBtoRGB(r.nextFloat(), 1f, 1f));
 		img = ImageHelper.colorize(HIT_MARKER, c);
 	}
@@ -30,9 +36,7 @@ public class Hitmarker extends GameObject{
 		super.render(g);
 		
 		if(time == 0)this.kill();
-		double a = time /totalTime;
-		
-		g.drawImage(img, getX(), getY(), null);
+		g.drawImage(img, getX(), getY(), ScaleUtils.scaleNumber(size), ScaleUtils.scaleNumber(size), null);
 		
 		time--;
 	}
