@@ -1,6 +1,7 @@
 package griffin.smithclicker.main;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.math.BigInteger;
@@ -14,22 +15,25 @@ import griffin.smithclicker.event.EventManager;
 import griffin.smithclicker.objects.GameObject;
 import griffin.smithclicker.objects.IClickable;
 import griffin.smithclicker.objects.Smith;
+import griffin.smithclicker.objects.display.BackgroundOverlay;
 import griffin.smithclicker.objects.display.SmithCount;
+import griffin.smithclicker.objects.display.SmithLoadup;
 import griffin.smithclicker.objects.display.StatBox;
 import griffin.smithclicker.objects.extrasmith.GoldenSmith;
 import griffin.smithclicker.objects.upgrades.Upgrade;
 import griffin.smithclicker.objects.upgrades.UpgradeScrollbar;
 import griffin.smithclicker.objects.upgrades.Upgrades;
-import griffin.smithclicker.objects.upgrades.mini.Miniupgrade;
 import griffin.smithclicker.objects.upgrades.mini.UpgradeWindow;
+import griffin.smithclicker.util.ImageHelper;
 import griffin.smithclicker.util.SoundHelper;
 import griffin.smithclicker.util.StringUtils;
 
 public class GameManager {
 	
-	public static int GAME_WIDTH = 1600;
-	public static int GAME_HEIGHT = 1000;
-	public static double GAME_RATIO = GAME_WIDTH / 1200.0;
+	public static int GAME_WIDTH = 1024;
+	public static int GAME_HEIGHT = 768;
+	public static double GAME_RATIO = GAME_WIDTH / 1024.0;
+	//Old dimens: 1600, 1200
 	
 	public static int GAME_INSET_TOP;
 	public static int GAME_INSET_LEFT;
@@ -46,6 +50,8 @@ public class GameManager {
 	private static BigInteger total_clicks = new BigInteger("0");
 	private static BigInteger smiths_this_second = new BigInteger("0");
 	
+	private static Image background = ImageHelper.loadImage("/background/SmithClicker.png");
+	
 	public static final String FONT_NAME = "Comic Sans MS";
 	
 	public static boolean shift_held = false;
@@ -61,9 +67,6 @@ public class GameManager {
 	public ArrayList<MouseEvent> clicks;
 	public ArrayList<MouseEvent> presses;
 	
-	
-	
-	
 	public GameManager() {
 		objectList = new ArrayList<GameObject>();
 		removeList = new ArrayList<GameObject>();
@@ -74,6 +77,10 @@ public class GameManager {
 	
 	public static GameManager getManager(){
 		return manager;
+	}
+	
+	public void setupLoad() {
+		addList.add(new SmithLoadup());
 	}
 	
 	public void setupBaseGame(){
@@ -88,6 +95,7 @@ public class GameManager {
 		addList.add(new SmithCount());
 		addList.add(new StatBox());
 		addList.add(new UpgradeWindow(Upgrades.upgrades.getMiniupgrades()));
+		addList.add(new BackgroundOverlay());
 		SoundHelper.setBackgroundMusic("screaming.wav");
 		SaveManager.loadFromGameFile();
 	}
@@ -122,7 +130,7 @@ public class GameManager {
 				int posY = rand.nextInt(Smith.getBoxHeight() - GoldenSmith.getBoxHeight()) + Smith.getPosY();
 				addObject(new GoldenSmith(posX, posY));
 			}
-			gSmithCounter = rand.nextInt(3600) + 2400;
+			gSmithCounter = rand.nextInt(180) + 120;
 		}else gSmithCounter--;
 		
 		Effects.effects.tickEffects();
@@ -135,6 +143,7 @@ public class GameManager {
 	
 	
 	public void render(Graphics g){
+		g.drawImage(background, 0, 0, GAME_WIDTH, GAME_HEIGHT, null);
 		for(Integer i : renderList.keySet()) {
 			ArrayList<GameObject> objectList = renderList.get(i);
 			for(GameObject o : objectList){

@@ -30,16 +30,11 @@ public class UpgradeWindow extends GameObject implements IClickable{
 	@Override
 	public void render(Graphics g) {
 		
-		g.setColor(Color.gray);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-		g.setColor(Color.black);
-		g.drawRect(getX(), getY(), getWidth(), getHeight());
-		
 		for(Miniupgrade m : upgradeList) {
 			m.setDisplayed(false);
 		}
 		
-		for(int i = 0; i < 42; i++) {
+		for(int i = 0; i < 36; i++) {
 			try {
 				upgradeList.get(i).render(g);
 			}catch(Exception e) {}
@@ -61,8 +56,6 @@ public class UpgradeWindow extends GameObject implements IClickable{
 
 	@Override
 	public void pressed(int x, int y, int type) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

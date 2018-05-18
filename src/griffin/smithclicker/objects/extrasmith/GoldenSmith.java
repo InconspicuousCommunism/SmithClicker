@@ -19,20 +19,26 @@ public class GoldenSmith extends GameObject implements IClickable{
 	
 	private GoldenType gType;
 	
-	private static int BOX_WIDTH = 150;
-	private static int BOX_HEIGHT = 200;
+	private static int BOX_WIDTH = 75;
+	private static int BOX_HEIGHT = 100;
+	
+	private int life;
+	private static double i;
 	
 	public GoldenSmith(int x, int y) {
-		super(x,y,BOX_WIDTH,BOX_HEIGHT,1001);
+		super(x,y,(int)(BOX_WIDTH * (i = .5 + (.5 * Math.random()))),(int)(BOX_HEIGHT * i),1001);
 		gType = GoldenType.getRandomType(new Random());
+		life = 1200;
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
 		g.drawImage(img, getX(), getY(), getWidth(), getHeight(), null);
+		life--;
+		if(life <= 0)this.kill();
 	}
-
+	
 	@Override
 	public void clicked(int x, int y, int type) {
 		int mult = 2;

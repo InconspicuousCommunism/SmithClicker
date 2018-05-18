@@ -12,26 +12,21 @@ import griffin.smithclicker.util.ImageHelper;
 
 public class Smith extends GameObject implements IClickable{
 	
-	private static final BufferedImage img = ImageHelper.loadImage("/icons/smith.jpg");
+	private static final BufferedImage img = ImageHelper.loadImage("/icons/smith.png");
 	
-	private static final int POS_Y;
-	private static final int WIDTH;
-	private static final int HEIGHT;
-	
-	static {
-		WIDTH = (int)((350.0/1200)*GameManager.GAME_WIDTH);
-		HEIGHT = (int)((500.0/800)*GameManager.GAME_HEIGHT);
-		POS_Y = GameManager.GAME_HEIGHT - HEIGHT;
-	}
+	private static final int POS_X = 7;
+	private static final int POS_Y = 410;
+	private static final int WIDTH = 287;
+	private static final int HEIGHT = 350;
 	
 	public Smith() {
-		super(0,POS_Y, WIDTH, HEIGHT);
+		super(POS_X,POS_Y, WIDTH, HEIGHT);
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		
-		g.drawImage(img, 0, POS_Y, getWidth(), getHeight(), null);
+		g.drawImage(img, POS_X, POS_Y, getWidth(), getHeight(), null);
 		
 		super.render(g);
 	}

@@ -17,27 +17,20 @@ import griffin.smithclicker.util.StringUtils;
 
 public class StatBox extends GameObject{
 	
-	private static final Font STATS_TITLE;
 	private static final Font STATS_INFO;
 	private static final Font UPGRADE_STATS;
 	
 	static {
-		STATS_TITLE = new Font("Comic Sans MS", Font.BOLD, 24);
-		STATS_INFO = new Font("Comic Sans MS", Font.PLAIN, 20);
-		UPGRADE_STATS = new Font("Comic Sans MS", Font.PLAIN, 18);
+		STATS_INFO = new Font("Comic Sans MS", Font.PLAIN, 15);
+		UPGRADE_STATS = new Font("Comic Sans MS", Font.PLAIN, 12);
 	}
 	
-	private static final int POS_X;
-	private static final int POS_Y;
-	private static final int WIDTH;
-	private static final int HEIGHT;
-	
-	static {
-		POS_X = (int)((350.0/1200)*GameManager.GAME_WIDTH);
-		WIDTH = (int)(350 * GameManager.GAME_RATIO);
-		POS_Y = (int)((300.0/800)*GameManager.GAME_HEIGHT);
-		HEIGHT = GameManager.GAME_HEIGHT - POS_Y;
-	}
+	private static final int POS_X = 303;
+	private static final int POS_Y = 459;
+	private static final int WIDTH = 399;
+	private static final int HEIGHT = 301;
+	private static final int START_TEXT_Y = 15;
+	private static final int DIST_BETWEEN_TEXT = 30;
 	
 	public StatBox() {
 		super(POS_X, POS_Y, WIDTH,HEIGHT);
@@ -46,21 +39,15 @@ public class StatBox extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		
-		g.setColor(Color.GRAY);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-		g.setColor(Color.black);
-		g.drawLine(getX(), getY() + 30, getX() + getWidth(), getY() + 30);
-		g.drawRect(getX(), getY(), getWidth(), getHeight());
 		g.setColor(Color.cyan);
-		StringUtils.drawStringCentered(g, STATS_TITLE, "Game Statistics", getX(), getWidth(), getY() + 23);
-		StringUtils.drawStats(g, STATS_INFO, "Smiths Per Second", StringUtils.formatNumber(GameManager.getSmithsPerSecond()), getX(), getWidth(), getY() + 60);
-		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Upgrades", StringUtils.formatNumber(GameManager.getUpgradeSmiths()), getX(), getWidth(), getY() + 100);
-		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Clicks", StringUtils.formatNumber(GameManager.getClickSmiths()), getX(), getWidth(), getY() + 140);
-		StringUtils.drawStats(g, STATS_INFO, "Total Amount of Smiths Collected", StringUtils.formatNumber(GameManager.getTotalSmiths()), getX(), getWidth(), getY() + 180);
-		StringUtils.drawStats(g, STATS_INFO, "Total Clicks", StringUtils.formatNumber(GameManager.getTotalClicks()), getX(), getWidth(), getY() + 220);
+		StringUtils.drawStats(g, STATS_INFO, "Smiths Per Second", StringUtils.formatNumber(GameManager.getSmithsPerSecond()), getX(), getWidth(), getY()+START_TEXT_Y);
+		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Upgrades", StringUtils.formatNumber(GameManager.getUpgradeSmiths()), getX(), getWidth(), getY() + START_TEXT_Y + DIST_BETWEEN_TEXT * 1);
+		StringUtils.drawStats(g, STATS_INFO, "Smiths Collected From Clicks", StringUtils.formatNumber(GameManager.getClickSmiths()), getX(), getWidth(), getY() + START_TEXT_Y + DIST_BETWEEN_TEXT * 2);
+		StringUtils.drawStats(g, STATS_INFO, "Total Amount of Smiths Collected", StringUtils.formatNumber(GameManager.getTotalSmiths()), getX(), getWidth(), getY() + START_TEXT_Y + DIST_BETWEEN_TEXT * 3);
+		StringUtils.drawStats(g, STATS_INFO, "Total Clicks", StringUtils.formatNumber(GameManager.getTotalClicks()), getX(), getWidth(), getY() + START_TEXT_Y + DIST_BETWEEN_TEXT * 4);
 		g.setColor(Color.black);
-		StringUtils.drawStringCentered(g, STATS_INFO, "EFFECTS", getX(), WIDTH, 280 + getY());
-		int y = 280 + getY() + 20;
+		StringUtils.drawStringCentered(g, STATS_INFO, "EFFECTS", getX(), WIDTH, 175 + getY());
+		int y = getY() + 20;
 		g.setColor(Color.RED);
 		for(Effect e : Effects.effects.getList()) {
 			y+=20;

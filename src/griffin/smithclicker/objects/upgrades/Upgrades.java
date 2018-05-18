@@ -36,24 +36,26 @@ public class Upgrades {
 	public Upgrades() {
 		upgradeList = new ArrayList<Upgrade>();
 		miniupgradeList = new ArrayList<Miniupgrade>();
-		//                          id,                         img,                       baseCost,                            costExp, baseMult, cps,               clickIncrease, name, (if music) sound
-		hemanSword    = new Upgrade(0, ImageHelper.loadImage("/icons/hemansword.png"),    10,                                        2, 25,  0,                             1,     "Heman Sword");
-		skeletor      = new MusicUpgrade(1, ImageHelper.loadImage("/icons/skeletor.png"), 100,                                       2, 50,  1,                             0,     "Skeletor", "heman.wav");
-		cryptoFarm    = new Upgrade(2, ImageHelper.loadImage("/icons/crypto.jpg"),        10000,                                     3, 75,  10,                            0,     "Cryptocurrency Farm");
-		basicMath     = new Upgrade(3, ImageHelper.loadImage("/icons/basicmath.jpg"),     1000000,                                   3, 100, 100,                           0,     "Basic Math");
-		extraCredit   = new Upgrade(4, ImageHelper.loadImage("/icons/extracredit.gif"),   100000000,                                 4, 125, 1000,                          0,     "Extra Credit");
-		kyleCarry     = new Upgrade(5, ImageHelper.loadImage("/icons/kyle.jpg"),          new BigInteger("10000000000"),             4, 150, 10000,                         0,     "Kyle Carry");
-		mommyHat      = new Upgrade(6, ImageHelper.loadImage("/icons/mommyhat.JPG"),      new BigInteger("1000000000000"),           5, 175, 100000,                        0,     "Mommy Hat");
-		parentEmail   = new Upgrade(7, ImageHelper.loadImage("/icons/email.png"),         new BigInteger("100000000000000"),         5, 200, 1000000,                       0,     "Parent Email");
-		poopVariables = new Upgrade(8, ImageHelper.loadImage("/icons/poopvariable.jpg"),  new BigInteger("10000000000000000"),       6, 225, 10000000,                      0,     "Poop Variables");
-		theBigP       = new Upgrade(9, ImageHelper.loadImage("/icons/thebigp.jpg"),       new BigInteger("1000000000000000000"),     6, 250, 100000000,                     0,     "The Big P");
-		ticklingBoys  = new Upgrade(10, ImageHelper.loadImage("/icons/tickling.jpg"),     new BigInteger("100000000000000000000"),   7, 275, 1000000000,                    0,     "Tickling Boys");
-		whiteBoard    = new Upgrade(11, ImageHelper.loadImage("/icons/whiteboard.JPG"),   new BigInteger("10000000000000000000000"), 7, 300, new BigInteger("10000000000"), 10000, "White Board");
+		//                          id,                         img,                       baseCos                   sps,  clickIncrease, name, (if music) sound
+		BigInteger base = new BigInteger("150");
+		BigInteger mult = new BigInteger("5");
+		hemanSword    = new Upgrade(0, ImageHelper.loadImage("/icons/hemansword.png"),    base,                         0,      1,     "Heman Sword");
+		skeletor      = new MusicUpgrade(1, ImageHelper.loadImage("/icons/skeletor.png"), (base = base.multiply(mult)), 1,      0,     "Skeletor", "heman.wav");
+		basicMath     = new Upgrade(2, ImageHelper.loadImage("/icons/basicmath.jpg"),     (base = base.multiply(mult)), 5,      0,     "Basic Math");
+		whiteBoard    = new Upgrade(3, ImageHelper.loadImage("/icons/whiteboard.jpg"),    (base = base.multiply(mult)), 40,     0,     "White Board");
+		extraCredit   = new Upgrade(4, ImageHelper.loadImage("/icons/extracredit.gif"),   (base = base.multiply(mult)), 100,    0,     "Extra Credit");
+		kyleCarry     = new Upgrade(5, ImageHelper.loadImage("/icons/kyle.jpg"),          (base = base.multiply(mult)), 400,    0,     "Kyle Carry");
+		mommyHat      = new Upgrade(6, ImageHelper.loadImage("/icons/mommyhat.JPG"),      (base = base.multiply(mult)), 1000,   0,     "Mommy Hat");
+		parentEmail   = new Upgrade(7, ImageHelper.loadImage("/icons/email.png"),         (base = base.multiply(mult)), 4000,   0,     "Parent Email");
+		poopVariables = new Upgrade(8, ImageHelper.loadImage("/icons/poopvariable.jpg"),  (base = base.multiply(mult)), 10000,  0,     "Poop Variables");
+		theBigP       = new Upgrade(9, ImageHelper.loadImage("/icons/thebigp.jpg"),       (base = base.multiply(mult)), 40000,  0,     "The Big P");
+		ticklingBoys  = new Upgrade(10, ImageHelper.loadImage("/icons/tickling.jpg"),     (base = base.multiply(mult)), 100000, 0,     "Tickling Boys");
+		cryptoFarm    = new Upgrade(11, ImageHelper.loadImage("/icons/crypto.jpg"),       (base = base.multiply(mult)), 400000, 10000, "Cryptocurrency Farm");
 		
 		upgradeList.add(hemanSword);
 		upgradeList.add(skeletor);
-		upgradeList.add(cryptoFarm);
 		upgradeList.add(basicMath);
+		upgradeList.add(whiteBoard);
 		upgradeList.add(extraCredit);
 		upgradeList.add(kyleCarry);
 		upgradeList.add(mommyHat);
@@ -61,12 +63,10 @@ public class Upgrades {
 		upgradeList.add(poopVariables);
 		upgradeList.add(theBigP);
 		upgradeList.add(ticklingBoys);
-		upgradeList.add(whiteBoard);
+		upgradeList.add(cryptoFarm);
 		
 		//Miniupgrades
 		initMinis();
-		
-		
 		
 		for(int i = 0; i < miniupgradeList.size(); i++) {
 			miniupgradeList.get(i).changeListPosition(i);
@@ -318,7 +318,7 @@ public class Upgrades {
 				new BigInteger("100000000000000000000000"),
 				ImageHelper.loadImage("/icons/thebigp.jpg"), Arrays.asList(new Requirement[] {new Requirement.CostReq(new BigInteger("1000000"))}),
 				theBigP, IncreaseType.multiply_add,  new BigInteger("2"), Color.red));
-		miniupgradeList.add(new UpgradeMU("The Big P", "Doubles The Effectiveness of Blue Pelican Java",
+		miniupgradeList.add(new UpgradeMU("The True Big P", "Doubles The Effectiveness of Blue Pelican Java",
 				new BigInteger("10000000000000000000000000"),
 				ImageHelper.loadImage("/icons/thebigp.jpg"), Arrays.asList(new Requirement[] {new Requirement.CostReq(new BigInteger("100000000"))}),
 				theBigP, IncreaseType.multiply_add,  new BigInteger("2"), Color.magenta));

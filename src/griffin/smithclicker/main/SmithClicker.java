@@ -10,9 +10,9 @@ public class SmithClicker{
 		thread = new SmithThread();
 		frame = new SmithFrame();
 		
-		GameManager.getManager().setupBaseGame();
+		GameManager.getManager().setupLoad();
 		
-		thread.run();
+		thread.start();
 		
 	}
 	

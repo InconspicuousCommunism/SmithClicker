@@ -36,13 +36,13 @@ public class UpgradeScrollbar extends GameObject implements IClickable{
 	
 	@Override
 	public void render(Graphics g) {
-		super.render(g);
-		g.setColor(Color.gray);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
-		g.setColor(Color.black);
-		if(clicked)g.setColor(Color.DARK_GRAY);
-		g.drawRect(getX(), getY(), getWidth(), getHeight());
-		g.fillRect(getX() + 3, scrollTop + 3, getWidth() - 6, scrollLength - 6);
+//		super.render(g);
+//		g.setColor(Color.gray);
+//		g.fillRect(getX(), getY(), getWidth(), getHeight());
+//		g.setColor(Color.black);
+//		if(clicked)g.setColor(Color.DARK_GRAY);
+//		g.drawRect(getX(), getY(), getWidth(), getHeight());
+//		g.fillRect(getX() + 3, scrollTop + 3, getWidth() - 6, scrollLength - 6);
 	}
 	
 	@Override

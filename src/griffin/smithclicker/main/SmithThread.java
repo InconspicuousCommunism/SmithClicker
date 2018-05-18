@@ -18,16 +18,16 @@ public static boolean running = false;
 		long time = System.nanoTime();
 		int ticks = 20;
 		int timeBetween = 1000000000 / ticks;
+		long curTime = System.nanoTime();
 		while(running){
-			long curTime = System.nanoTime();
-			if(curTime -time >= timeBetween){
+			curTime = System.nanoTime();
+			if(curTime - time >= timeBetween){
 				while(curTime - time >= timeBetween){
 					time += timeBetween;
 					tick();
 				}
 				render();
 			}
-			curTime = time;
 		}
 		
 	}

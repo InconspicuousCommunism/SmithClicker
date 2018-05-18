@@ -13,25 +13,18 @@ public class SmithCount extends GameObject{
 	private static final int SMITH_FONT_SIZE = 50;
 	private static final Font SMITH_FONT = new Font("Comic Sans MS", Font.BOLD, SMITH_FONT_SIZE);
 	
-	private static final int WIDTH;
-	private static final int HEIGHT;
-	private static final int POS_X;
-	
-	static {
-		POS_X = (int)((350.0/1200)*GameManager.GAME_WIDTH);
-		WIDTH = POS_X;
-		HEIGHT = (int)((300.0/800)*GameManager.GAME_HEIGHT);
-	}
+	private static final int WIDTH = 399;
+	private static final int HEIGHT = 286;
+	private static final int POS_X = 303;
+	private static final int POS_Y = 115;
 	
 	public SmithCount() {
-		super(POS_X, 0, WIDTH, HEIGHT);
+		super(POS_X, POS_Y, WIDTH, HEIGHT);
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(getX(), getY(), getWidth(), getHeight());
 		g.setFont(SMITH_FONT);
 		g.setColor(Color.cyan);
 		String smiths = GameManager.getFormattedSmiths();
